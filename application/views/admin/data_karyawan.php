@@ -19,8 +19,10 @@
                 <th scope="col">No</th>
                 <th scope="col">Name</th>
                 <th scope="col">Photo</th>
-                <th scope="col">File</th>
-                <th scope="col">Date</th>
+                <th scope="col">Email</th>
+                <th scope="col">Tanggal Lahir</th>
+                <th scope="col">Pendidikan Terakhir</th>
+                <th scope="col">Jabatan</th>
                 <th scope="col">Unit</th>
                 <th scope="col" colspan="2">Action</th>
               </tr>
@@ -62,20 +64,31 @@
                           <img src="<?= base_url('upload/').$st['photo'];?>" width="100" height="100">
                             <input class="form-control" type="file" id="photo" name="photo" value="<?= $st['photo'];?>">
                           </div>
-                        </div>
-                        <div class="row mb-3">
-                          <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                          <div class="col-sm-10">
-                            <input class="form-control" type="file" id="file" name="file" value="<?= $st['file']; ?>">
-                          </div>
                         </div> -->
+                        <div class="mb-3">
+                        <label for="inputText" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="email" name="email" value="<?= $st['email']; ?>">
+                        </div>
+                        </div>
                         <div class="row mb-3">
-                          <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+                          <label for="inputDate" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                           <div class="col-sm-10">
-                            <input type="date" class="form-control" id="date" name="date" value="<?= $st['date']; ?>">
+                            <input type="date" class="form-control" id="date" name="ttl" value="<?= $st['ttl']; ?>">
                           </div>
                         </div>
-
+                        <div class="row mb-3">
+                          <label for="inputDate" class="col-sm-2 col-form-label">Pendidikan Terakhir</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" value="<?= $st['pendidikan_terakhir']; ?>">
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="inputDate" class="col-sm-2 col-form-label">Jabatan</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?= $st['jabatan']; ?>">
+                          </div>
+                        </div>
                         <div class="mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Unit Ruangan</label>
                         <div class="col-sm-10">
