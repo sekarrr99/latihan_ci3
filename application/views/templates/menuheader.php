@@ -76,7 +76,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="<?= base_url('admin'); ?>">
+              <a class="dropdown-item d-flex align-items-center" href="<?= base_url('karyawan/profile'); ?>">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>

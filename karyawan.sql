@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Des 2023 pada 14.20
+-- Waktu pembuatan: 14 Jan 2024 pada 14.38
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -24,18 +24,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `cuti`
+--
+
+CREATE TABLE `cuti` (
+  `id_cuti` int(11) NOT NULL,
+  `nama` varchar(128) NOT NULL,
+  `tanggal_cuti` date NOT NULL,
+  `lama_cuti` int(11) NOT NULL,
+  `alamat_cuti` varchar(128) NOT NULL,
+  `keterangan` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `cuti`
+--
+
+INSERT INTO `cuti` (`id_cuti`, `nama`, `tanggal_cuti`, `lama_cuti`, `alamat_cuti`, `keterangan`) VALUES
+(5, 'SEKAR ASRI ANDAMARI', '2024-02-10', 4, 'jawa', 'urusan keluarga');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `karyawan`
 --
 
 CREATE TABLE `karyawan` (
   `id_karyawan` int(11) NOT NULL,
+  `nbm` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `photo` varchar(128) NOT NULL,
-  `file` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `pendidikan_terakhir` varchar(128) NOT NULL,
+  `jabatan` varchar(128) NOT NULL,
   `unit` varchar(128) NOT NULL,
-  `date` date NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `karyawan`
+--
+
+INSERT INTO `karyawan` (`id_karyawan`, `nbm`, `name`, `photo`, `email`, `tgl_lahir`, `pendidikan_terakhir`, `jabatan`, `unit`, `id_user`) VALUES
+(2, 78998768, 'asri', 'Tidak Ada File', 'sekar20220200001@sibermu.ac.id', '2010-03-04', 'SMK', 'Staf', 'BPJS', 4),
+(9, 908230912, 'sekar asri', 'rr3.png', 'sekarasriandamari1@gmail.com', '2000-06-13', 'D3', 'Staf', 'UGD', 4),
+(10, 2147483647, 'nadia', '9334237.jpg', 'sekarasriandamari0@gmail.com', '2009-10-13', 'SMA Sederajat', 'Penanggung Jawab', 'Lab', 4);
 
 -- --------------------------------------------------------
 
@@ -59,8 +93,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `name`, `email`, `image`, `password`, `id_role`, `is_active`, `datecreated`) VALUES
-(3, 'sekar asri', 'sekar@sibermu.ac.id', 'user.jpg', '$2y$10$aV3sDZqfA6Oo5e5CkNQYDeOGX9FhWubUHU7f3A39et8o5spo3YpOy', 2, 1, 1701566885),
-(4, 'sekar asri andamari', 'sekar20220200001@sibermu.ac.id', 'user.jpg', '$2y$10$AHupa7n.WA4j.u7Itasohe2VmwP/xBr5C25aZzEgBUBiqjZLX8UK2', 1, 1, 1701569813),
+(4, 'SEKAR ASRI ANDAMARI', 'sekar20220200001@sibermu.ac.id', 'user.jpg', '$2y$10$AHupa7n.WA4j.u7Itasohe2VmwP/xBr5C25aZzEgBUBiqjZLX8UK2', 1, 1, 1701569813),
 (5, 'sekar', 'sekarasriandamari0@gmail.com', 'user.jpg', '$2y$10$cwElGC3doDQHVXrTX186cuXUOmokz9cVVmB8ZXK1Wf.HgoFeEznMW', 2, 1, 1701572427);
 
 -- --------------------------------------------------------
@@ -142,14 +175,21 @@ CREATE TABLE `user_sub_menu` (
 --
 
 INSERT INTO `user_sub_menu` (`id_user_submenu`, `id_menu`, `title`, `url`, `icon`, `is_active`) VALUES
-(1, 2, 'Profil', 'admin', 'fa-solid fa-user-gear', 1),
+(1, 1, 'Dashboard', 'admin', 'fa-solid fa-user-gear', 1),
 (2, 2, 'Input Data', 'karyawan', 'fa-solid fa-building', 1),
-(3, 1, 'Data Karyawan', 'admin/data_karyawan', '', 1),
-(4, 2, 'Pengajuan Cuti', 'karyawan/cuti', '', 1);
+(3, 1, 'Data Karyawan', 'admin/data_karyawan', 'fa-solid fa-user-gear', 1),
+(4, 2, 'Pengajuan Cuti', 'karyawan/cuti', 'fa-solid fa-building', 1),
+(5, 2, 'Profile', 'karyawan/profile', 'fa-solid fa-building', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `cuti`
+--
+ALTER TABLE `cuti`
+  ADD PRIMARY KEY (`id_cuti`);
 
 --
 -- Indeks untuk tabel `karyawan`
@@ -194,16 +234,22 @@ ALTER TABLE `user_sub_menu`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `cuti`
+--
+ALTER TABLE `cuti`
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
@@ -227,7 +273,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT untuk tabel `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

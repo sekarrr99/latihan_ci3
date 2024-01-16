@@ -4,13 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		// logged_in();
+		logged_in();
 		$this->load->model('m_user');
 	}
 	public function index()
 	{
         $data['user']= $this->db->get_where('user',['email'=> $this->session->userdata('email')])->row_array();
-		$data['title']= 'Corporate Zen';
+		$data['title']= 'Dashboard';
 		
 		$this->load->view('templates/menuheader', $data);
 		$this->load->view('templates/menusidebar', $data);
@@ -35,9 +35,13 @@ class Admin extends CI_Controller {
 
 	public function update_karyawan(){
 		$id_karyawan= $this->input->post('id_karyawan');
+		$nbm= $this->input->post('nbm');
 		$name= $this->input->post('name');
-		$date= $this->input->post('date');
-		$asal= $this->input->post('unit');
+		$email= $this->input->post('email');
+		$tgl_lahir= $this->input->post('tgl_lahir');
+		$pendidikan_terakhir= $this->input->post('pendidikan_terakhir');
+		$jabatan= $this->input->post('jabatan');
+		$unit= $this->input->post('unit');
 		$id_user= $this->session->userdata('id_user');
 
 		// $photo= $_FILES['photo'];
@@ -57,28 +61,14 @@ class Admin extends CI_Controller {
 		// 	$photo = $this->upload->data('file_name');
 		// }
 
-		// $file= $_FILES['file'];
-		// $path= 'upload';
-		// $config['upload_path'] = $path;
-		// $config['allowed_types'] = 'pdf';
-		// $this->load->library('upload', $config);
-		// $this->upload->initialize($config);
-		// if (!$this->upload->do_upload('file')) {
-		// 	$error = array('error' => $this->upload->display_errors());
-		// }else {
-		// 	$data = array('upload_data' => $this->upload->data());
-		// }
-		// if (!$this->upload->data('file_name')) {
-		// 	$file = 'Tidak Ada File';
-		// }else{
-		// 	$file = $this->upload->data('file_name');
-		// }
-
 		$data= array(
+			'nbm'=> $nbm,
 			'name'=> $name,
 			'photo'=> $photo,
-			// 'file'=> $file,
-			// 'date'=> $date,
+			'email'=> $email,
+			'tgl_lahir'=> $tgl_lahir,
+			'pendidikan_terakhir'=> $pendidikan_terakhir,
+			'jabatan'=> $jabatan,
 			'unit'=> $unit,
 			'id_user'=> $id_user
 		);

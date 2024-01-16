@@ -17,6 +17,7 @@
             <thead>
               <tr class="text-center">
                 <th scope="col">No</th>
+                <th scope="col">NBM</th>
                 <th scope="col">Name</th>
                 <th scope="col">Photo</th>
                 <th scope="col">Email</th>
@@ -33,16 +34,19 @@
               foreach ($karyawan as $kr) :?>
               <tr>
                 <th scope="row"><?= $no++; ?></th>
+                <td><?= $kr['nbm']; ?></td>
                 <td><?= $kr['name']; ?></td>
                 <td><img src="<?= base_url('upload/').$kr['photo'];?>" width="100" height="100"></td>
-                <td><a href="<?= base_url('upload/'). $kr['file'];?>" download><?= $kr['file']; ?></a></td>
-                <td><?= $kr['date']; ?></td>
+                <td><?= $kr['email']; ?></td>
+                <td><?= $kr['tgl_lahir']; ?></td>
+                <td><?= $kr['pendidikan_terakhir']; ?></td>
+                <td><?= $kr['jabatan']; ?></td>
                 <td><?= $kr['unit']; ?></td>
                 <td class="text-center" onclick="javascript: return confirm('Apakah Yakin Dihapus?')">
                   <?php echo anchor('admin/delete/'. $kr['id_karyawan'], '<i class="btn btn-danger">Delete</i>'); ?>
                 </td>
                 <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#Modal<?= $kr['id_karyawan']; ?>" data-bs-whatever="@mdo">Edit</button></td>
-                <div class="modal fade" id="Modal<?= $st['id_karyawan']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="Modal<?= $kr['id_karyawan']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -51,48 +55,58 @@
                     </div>
                     <div class="modal-body">
                       <form method="POST" action="<?php echo base_url().'admin/update_karyawan';?>">
+                      <div class="mb-3">
+                        <label for="inputText" class="col-sm-2 col-form-label">NBM</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="nbm" name="nbm" value="<?= $kr['nbm']; ?>">
+                        </div>
+                        </div>
                         <div class="mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="hidden" class="form-control" id="id_karyawan" name="id_karyawan" value="<?= $st['id_karyawan']; ?>">
-                          <input type="text" class="form-control" id="name" name="name" value="<?= $st['name']; ?>">
+                          <input type="hidden" class="form-control" id="id_karyawan" name="id_karyawan" value="<?= $kr['id_karyawan']; ?>">
+                          <input type="text" class="form-control" id="name" name="name" value="<?= $kr['name']; ?>">
                         </div>
                         </div>
-                        <!-- <div class="row mb-3">
+                        <div class="row mb-3">
                           <label for="inputNumber" class="col-sm-2 col-form-label">Photo</label>
                           <div class="col-sm-10">
-                          <img src="<?= base_url('upload/').$st['photo'];?>" width="100" height="100">
-                            <input class="form-control" type="file" id="photo" name="photo" value="<?= $st['photo'];?>">
+                          <img src="<?= base_url('upload/').$kr['photo'];?>" width="100" height="100">
+                            <input class="form-control" type="file" id="photo" name="photo" value="<?= $kr['photo'];?>">
                           </div>
-                        </div> -->
+                        </div>
                         <div class="mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="email" name="email" value="<?= $st['email']; ?>">
+                          <input type="text" class="form-control" id="email" name="email" value="<?= $kr['email']; ?>">
                         </div>
                         </div>
                         <div class="row mb-3">
                           <label for="inputDate" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                           <div class="col-sm-10">
-                            <input type="date" class="form-control" id="date" name="ttl" value="<?= $st['ttl']; ?>">
+                            <input type="date" class="form-control" id="date" name="ttl" value="<?= $kr['tgl_lahir']; ?>">
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label for="inputDate" class="col-sm-2 col-form-label">Pendidikan Terakhir</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" value="<?= $st['pendidikan_terakhir']; ?>">
-                          </div>
+                        <label class="col-sm-2 col-form-label">Pendidikan Terakhir</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" aria-label="Default select example" id="pendidikan_terakhir" name="pendidikan_terakhir">
+                            <option selected>Open this select menu</option>
+                            <option value="SMA Sederajat">SMA Sederajat</option>
+                            <option value="D3">D3</option>
+                            <option value="S1">S1</option>
+                            <option value="S2">S2</option>
+                          </select>
                         </div>
                         <div class="row mb-3">
                           <label for="inputDate" class="col-sm-2 col-form-label">Jabatan</label>
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?= $st['jabatan']; ?>">
+                            <input type="text" class="form-control" id="jabatan" name="jabatan" value="<?= $kr['jabatan']; ?>">
                           </div>
                         </div>
                         <div class="mb-3">
                         <label for="inputText" class="col-sm-2 col-form-label">Unit Ruangan</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="unit" name="unit" value="<?= $st['unit']; ?>">
+                          <input type="text" class="form-control" id="unit" name="unit" value="<?= $kr['unit']; ?>">
                         </div>
                         </div>
                       

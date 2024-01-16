@@ -100,6 +100,6 @@ class User extends CI_Controller {
 
 	public function blocked()
 	{
-		echo "Access Blocked";
+		echo "Sorry, Access Blocked!";
 	}
 }
